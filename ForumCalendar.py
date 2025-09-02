@@ -2,7 +2,7 @@
 """
 Created on Fri Aug 26 13:35:31 2022
 
-@author: Ramon
+@author: Ramon Luichies
 """
 
 import requests
@@ -25,12 +25,6 @@ from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from datetime import datetime, timedelta
 from bs4 import BeautifulSoup
-
-credentials = pickle.load(open("token.pkl", "rb"))
-service = build("calendar", "v3", credentials=credentials)
-result = service.calendarList().list().execute()
-calendar_id = result['items'][-1]['id']
-results = service.events().list(calendarId=calendar_id, timeZone='Europe/Amsterdam').execute()
 
 locale.setlocale(locale.LC_TIME, 'nl_NL.UTF-8')
 
@@ -151,7 +145,13 @@ def on_create_event():
 
 
 def create_event(start_time, end_time, summary):
-    """Creates choosen event in Google Calendar"""
+    """Creates choosen event in Google Calendar"""    
+    credentials = pickle.load(open("token.pkl", "rb"))
+    service = build("calendar", "v3", credentials=credentials)
+    result = service.calendarList().list().execute()
+    calendar_id = result['items'][-1]['id']
+    results = service.events().list(calendarId=calendar_id, timeZone='Europe/Amsterdam').execute()
+    
     timezone = 'Europe/Amsterdam'
     event = {
       'summary': 'Forum - {}'.format(summary),
@@ -207,5 +207,6 @@ create_btn.grid(row=4, column=2, padx=20, pady=20, sticky="nsew")
 
 auth_btn = tk.Button(win, text="Authorize Calendar", command=authorize_calendar)
 auth_btn.grid(row=4, column=0, padx=20, pady=20, sticky="nsew")
+
 
 win.mainloop()
