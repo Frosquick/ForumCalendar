@@ -17,7 +17,7 @@ pip install -r requirements.txt
 * The Google APIs Client Library for Python uses the `client_secrets.json` file format for storing the `client_id`, `client_secret`, and other OAuth 2.0 parameters.
 * Download and put the `client_secrets.json` file in the same folder where you have cloned this repository.
 
-See [Creating authorization credentials](https://developers.google.com/identity/protocols/OAuth2WebServer#creatingcred) for how to obtain a `client_secrets.json` file.
+See [Creating authorization credentials](https://developers.google.com/identity/protocols/OAuth2WebServer#creatingcred) on how to obtain a `client_secrets.json` file.
 
 ### Executing program
 * Execute the program by running;
